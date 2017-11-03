@@ -1,0 +1,38 @@
+<div id="mis_alumnos" align="center">
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="header">
+                            <h4 class="title">Faltas</h4>
+                        </div>
+                        <div class="content table-responsive table-full-width">
+                            <table class="table table-hover table-striped table-bordered">
+                                <thead>
+                                    <th>Apellido</th>
+                                    <th>Nombre</th>
+                                    <th>Justifacadas</th>
+                                    <th>Inustifacadas</th>
+                                    <th>Total</th>
+                                </thead>
+                                 {% for al in todos_los_alumnos %}
+                                    <tbody>
+                                        <tr>
+                                            <td>{{al.apellido}}</td>
+                                            <td>{{al.nombre}}</td>
+                                            <td>{{al.faltas}}</td>
+                                            <td>{{al.faltas}}</td>
+                                            <td>{{al.faltas}}</td>
+                                        </tr>
+                                    </tbody>
+                                {% endfor %}
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

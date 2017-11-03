@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<!-- Cargamos archivos estáticos-->
+{% load static %}
+<html>
+	<head>
+		<!-- Importamos Google Icon Font -->
+		<link href="{% static 'materialize/icons/icons.css' %}" rel="stylesheet">
+		<script type="text/javascript" src="{% static 'jquery/jquery-3.2.1.min.js' %}"></script>
+		<script type="text/javascript" src="{% static 'materialize/js/materialize.min.js' %}"></script>
+		<!-- Importamos materialize.css -->
+		<link type="text/css" rel="stylesheet" href="{% static 'materialize/css/materialize.min.css' %}"  media="screen,projection"/>
+		<!-- Permitirle al navegador saber si está optimizado para dispositivos móbiles -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" charset="utf-8"/>
+		<!-- Agregamos un título a esta plantilla -->
+		<title>ADI</title>
+	</head>
+	<body style="background-color:#005580">
+		<!-- Navbar -->
+		<nav style="background-color: #4d4d33" role="navigation">
+			<div class="nav-wrapper z-depth-4">
+				<!-- Logo y título centrado -->
+				<a id="logo-container" data-target="modal1" onclick="abrir_modal()" class="brand-logo center modal-trigger">
+					<i class="material-icons prefix" style="font-size: 45px">assignment</i> ADI
+				</a>
+			</div>
+		</nav>
+		<!-- Parallax 1 -->
+		<div id="index-banner" class="parallax-container z-depth-4">
+			<div class="parallax"><img src='{% static "img/background2.jpg" %}' alt="Unsplashed background img 1"></div>
+		</div>
+		<!-- Contenido intermedio -->
+		<br>
+		<div class="container z-depth-5" style="background-color:#4d4d33">
+			<!-- Sección de íconos de redirección -->
+			<div class="section">
+				<!-- Fila -->
+				<div class="row center">
+					<!-- Alumnos -->
+					{% block alumnos %}
+					<div class="col s12 m4">
+						<div class="icon-block">
+							<h2 class="center white-text"><i class="medium material-icons prefix">face</i></h2>
+								<center>
+									<!-- Botón de redireccionamiento a view de alumnos -->
+									<a style="background-color:royalblue" class="btn waves-effect waves-light" href="{% url 'login_p' %}">Alumnos</a>
+									<p class="white-text" style="font-weight: bold;text-align: center;text-justify: inter-word">Incluye la función de revisión de inasistencias y estado de conducta, además de poder visualizar perfiles, los cuales incluyen los datos personales del alumno con la posibilidad de modificar éstos sólo en casos específicos.</p>
+									<p style="font-weight: bold;text-align: center">Espacio sólo para alumnos registrados</p>
+								</center>
+						</div>
+					</div>
+					{% endblock %}
+					<!-- Guardia -->
+					{% block guardia %}
+					<div class="col s12 m4">
+						<div class="icon-block">
+							<h2 class="center white-text"><i class="medium material-icons prefix">security</i></h2>
+								<center>
+									<!-- Botón de redireccionamiento a view del guardia -->
+									<a style="background-color:royalblue" class="btn waves-effect waves-light" href="{% url 'index_guardia' %}">Guardia</a>
+									<p class="white-text" style="font-weight: bold;text-align: center;text-justify: inter-word">Incluye la función de controlar de formularios que le serán entregados en un momento por los preceptores. Abarca la revisión de datos de los formularios para dar el alta a los alumnos que quisieran retirarse y están autorizados.</p>
+									<p style="font-weight: bold;text-align: center">Espacio sólo para guardias registrados</p>
+								</center>
+						</div>
+					</div>
+					{% endblock %}
+					<!-- Preceptores -->
+					{% block preceptores %}
+					<div class="col s12 m4">
+						<div class="icon-block">
+							<h2 class="center white-text"><i class="medium material-icons prefix">group</i></h2>
+								<center>
+									<!-- Botón de redireccionamiento a view del preceptor -->
+									<a style="background-color:royalblue" class="btn waves-effect waves-light" href="{% url 'login_p' %}">Preceptores</a>
+									<p class="white-text" style="font-weight: bold;text-align: center;text-justify: inter-word">Incluye funciones de visualización de datos de los alumnos, como así la modificación de éstos. Además, se podrán cargar formularios de salida y aplicar observaciones de conducta o porcentajes de inasistencia.</p>
+									<p style="font-weight: bold;text-align: center">Espacio sólo para preceptores registrados</p>
+								</center>
+						</div>
+					</div>
+					{% endblock %}
+					<!-- Truqueamos la fila poniendo una columna vacía para centrar el bloque de administración -->
+					<div class="col s12 m4 center">
+					</div>
+					<!-- Administradores -->
+					{% block administración %}
+					<div class="col s12 m4 center">
+						<div class="icon-block">
+							<h2 class="center white-text"><i class="medium material-icons prefix">collections_bookmark</i></h2>
+								<center>
+									<!-- Botón de redireccionamiento a view del admin -->
+									<a style="background-color:royalblue" class="btn waves-effect waves-light" href="{% url 'admin:index' %}">Administración</a>
+									<p class="white-text" style="font-weight: bold;text-align: center;text-justify: inter-word">Incluye la completa creación, manipulación y consulta de datos y funciones que abarcará el sistema ADI. Nótese que el acceso a ésta sección queda bajo la responsabilidad de cada institución escolar.</p>
+									<p style="font-weight: bold;text-align: center">Espacio sólo para administradores</p>
+								</center>
+						</div>
+					</div>
+					{% endblock %}
+					<!-- Llenamos la fila poniendo una columna vacía para centrar el bloque de administración -->
+					<div class="col s12 m4 center">
+					</div>
+				</div>
+			</div>
+		</div>
+		<br>
+		<!-- Parallax 2 -->
+		<div class="parallax-container valign-wrapper z-depth-4">
+			<div class="parallax">
+				<img src='{% static "img/background1.jpg" %}' alt="Unsplashed background img 2">
+			</div>
+		</div>
+		<!-- Footer -->
+		<footer class="page-footer z-depth-4" style="background-color: #005580">
+			<!-- Contenedor de información acerca de nosotros -->
+			<div class="container">
+				<div class="row">
+					<h5 class="white-text">Bio de la empresa</h5>
+					<p class="grey-text text-lighten-4" style="text-align:justify;text-justify:inter-word">Somos un equipo de
+						estudiantes del nivel secundario enfocado a la etapa de aprendizaje en desarrollo de aplicaciones web con
+						Django. ADI busca virtualizar archivos institucionales, reduciendo el papeleo para así mejorar el rendimiento
+						con respecto al manejo de tareas que lleva a cabo una institución escolar.</p>
+				</div>
+			<!-- Contenedor de créditos y copyright -->
+				<div class="footer-copyright z-depth-4" style="background-color:#5c5c3d">
+					<div class="container" style="text-align: center">Realizado por
+						<b>Gonzalo, Javier y Mateo</b> con <a style="color:#ff8484" href="http://materializecss.com/"><b>Materialize</b></a>
+					</div>
+				</div>
+			</div>
+		</footer>
+		<div id="modal1" class="modal">
+		    <div class="modal-content">
+		      <h4>Administrador de Datos Institucionales</h4>
+		      <p>El proyecto ADI tiene la función de facilitar las actividades tanto de la Preceptoria como de la
+					Administración de la Institución como el manejo de la asistencia y de los formularios de los alumnos
+				al momento de un imprevisto, también tiene un sistema con el que el Padre/Tutor puede visualizar cuantas
+			faltas tiene su hijo y poder ver si este se encuentra en la Institución</p>
+		    </div>
+		    <div class="modal-footer">
+		      <a class="modal-action modal-close waves-effect waves-green btn-flat"><i class="material-icons prefix" style="font-size: 45px">done</i></a>
+		    </div>
+		  </div>
+	</body>
+		<!-- Inicializamos parallax -->
+		<script>
+			$(document).ready(function(){
+				$('.parallax').parallax();
+			});
+
+			function abrir_modal(){
+				$('.modal').modal();
+			}
+
+		</script>
+	
+</html>

@@ -1,0 +1,67 @@
+<style>
+
+    .card {
+        background-color: #6699ff;
+    }
+</style>
+<body>
+    <br>
+    <div class="container">
+        <div class="section">
+            <div class="row center">
+                <div class="col-sm-6">
+                    <div class="card hoverable">
+                        <div class="card-content">
+                            <span class="card-title center"><h1>Formulario 2</h1></span>
+                            <div class="container">
+                                <br>
+                                <div class="col-sm-5">
+                                    {% for forms2 in todos_los_f2 %}
+                                        <div class="card indigo z-depth-5" style="background-color: royalblue">
+
+                                            <div style="color:#ffffff">
+                                                <center><span class="card-title">F2</span></center>
+                                            </div>
+                                            <br>
+                                            <div class="card-content white-text">
+                                                <center><p>{{forms2.alumno.apellido|upper}} {{forms2.alumno.nombre}} - Curso: {{forms2.alumno.curso.year}}-{{forms2.alumno.curso.division}}</p></center>
+                                                <br>
+                                                <i  onclick="datos_formulario('{% url 'datos_formulario_preceptor' forms2.id %}', {{forms2.id}})" id="myBtn"class="material-icons white-text text-darken-2 info">info</i>
+                                           </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% block all %}
+    
+    <div class="card hoverable" style="background-color: #9999e6">
+        <div class="col-sm-6">
+            <div class="card-content">
+                <span class="card-title center"><h1>Formulario 3</h1></span>
+                <br>
+                {% for forms3 in todos_los_f3 %}
+                    <div class="card indigo z-depth-5" style="background-color: #66ff66">
+
+                        <div style="color:#ffffff">
+                            <center><span class="card-title">F3</span></center>
+                        </div>
+                        <br>
+                        <div class="card-content white-text">
+                            <center><p>{{forms3.alumno.apellido|upper}} {{forms3.alumno.nombre}} - Curso: {{forms3.alumno.curso.year}}-{{forms3.alumno.curso.division}}</p></center>
+                            <br>
+                            <i onclick="datos_formulario('{% url 'datos_formulario_preceptor' forms3.id %}', {{forms3.id}})" id="myBtn"class="material-icons white-text text-darken-2 info">info</i>
+                       </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+</body>

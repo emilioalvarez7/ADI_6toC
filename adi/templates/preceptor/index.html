@@ -1,0 +1,330 @@
+  <!DOCTYPE html>
+  {% load static %}
+  <html>
+    <head>
+      <style>
+        division{
+            display: block;
+            height: 1px;
+            border: 0;
+            border-top: 1px solid #FFFF00;
+            margin: 1em 0;
+            padding: 0;
+        }
+        select option {
+            margin:40px
+        }
+      </style>
+      
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css">
+        <!-- Compiled and minified JavaScript -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <!-- Importamos Bootstrap -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.min.js"></script>
+        <!--Let browser know website is optimized for mobile-->
+      <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0"/>
+	  <title>Preceptor</title>
+    </head>
+	<!--Esto es una referencia para usar los iconos de materialize-->
+	<!--            <i class="material-icons"></i>                -->
+    <body>
+	  <nav class="nav-extended" style="background-color:#212121">
+  		<div class="nav-wrapper">
+  			<!-- Poner el nombre del preceptor actual al lado del Logo con los tags de Django-->
+  			<a href="#" class="brand-logo center">Preceptor {{user|upper}} </a>
+  			<a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+  			<ul id="nav-mobile" class="right hide-on-med-and-down">
+  			<li><a href="{% url 'logout_p' %}">Cerrar sesion</a></li>
+  			</ul>
+  			<ul class="side-nav" id="mobile-demo">
+  			<li><a href="#Desloguearse">Cerrar sesion</a></li>
+  			</ul>
+  		</div>
+  		<div class="nav-content">
+  			<ul class="tabs tabs-transparent">
+  			   <li class="tab"><a class="active" href="#alumnos">Alumnado</a></li>
+  			   <li class="tab"><a href="#formularios">Formularios</a></li>
+  			</ul>
+  		</div>
+	  </nav>
+	  <!-- Contenido del TAB Alumnos -->
+	  <div id="alumnos" class="col s12">
+		<nav class="nav-extended" style="background-color:#212121">
+			<div class="nav-wrapper">
+				<!-- Poner el nombre del preceptor actual al lado del Logo con los tags de Django-->
+				<a href="#" class="brand-logo">Alumnos</a>
+				<a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+			</div>
+			<div class="nav-content">
+				<ul class="tabs tabs-transparent">
+          <li class="tab"><a id="abrir_perfil" href="#perfiles">Ayuda</a></li>
+          <li class="tab"><a id="open_perfil" href="#perfiles">Estado Alumnos</a></li>
+				</ul>
+			</div>
+    </nav>
+	  </div>
+
+	  <!-- Contenido del TAB Formularios -->
+	  <div id="formularios" class="col s12">
+		<nav class="nav-extended" style="background-color:#212121;height:25%;">
+			<div class="nav-wrapper">
+				<!-- Poner el nombre del preceptor actual al lado del Logo con los tags de Django-->
+				<center><a href="#" id="formularios" class="brand-logo">Formularios</a></center>
+			</div>
+			<div class="nav-content">
+				<ul class="tabs tabs-transparent">
+          <li class="tab"><a id="open_cf" href="#f1">Crear Formulario</a></li>
+					<li class="tab"><a id="ver_formularios" href="#f1">Ver Formularios</a></li>
+          <li class="tab"><a id="charts" href="#perfiles">Charts</a></li>
+				</ul>
+			</div>
+	    </nav>
+
+    <div id="contenido"></div>
+    <div id="contenido2"></div>
+
+    <!-- Modal para crear Formulario -->
+
+    <div id="id01" class="w3-modal">
+    	<div class="modal-dialog modal-sm" id="datos">
+      </div>
+    </div>
+          
+    
+
+      <!-- Modal para los datos del F2 -->
+
+      <div id="id02" class="w3-modal">
+      	<div class="modal-dialog modal-sm" id="datos2">
+      	</div>
+    </div>
+
+    </div>
+      </body>
+      <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+      <script>
+        $(document).ready(function(){
+            $('#open_perfil').click(function(){
+              $.ajax({
+                method: "GET",
+                url: "/mis_alumnos/",
+              })
+                .done(function(data){
+                  $("#contenido2")[0].innerHTML = data;
+                });
+            });
+            $('#charts').click(function(){
+              $.ajax({
+                method: "GET",
+                url: "/charts/",
+              })
+                .done(function(data){
+                  $("#contenido2")[0].innerHTML = data;
+                  arranca();
+                });
+            });
+            function arranca(){
+              $.ajax({
+                 method: "GET",
+                 url: '/prueba/estoy',
+               })
+                 .done(function(datos){
+                   new Chart(document.getElementById("bar-chart-horizontal"), {
+                      type: 'horizontalBar',
+                      data: {
+                        labels: ["Presentes", "Ausentes", "Retirados"],
+                        datasets: [
+                          {
+                            label: "Cantidad",
+                            backgroundColor: ["#3e95cd", "#ff6347","#585858"],
+                            data: [datos.presente,datos.ausente,datos.saliendo],
+                          }
+                        ]
+                      },
+                      options: {
+                        responsive: true,
+                        legend: { display: false },
+                        title: {
+                          fontSize: 60,
+                          display: true,
+                          text: 'Alumnos'
+                        }
+                      }
+                      });
+                      new Chart(document.getElementById("doughnut-chart"), {
+                      type: 'doughnut',
+                      data: {
+                        labels: ["Presentes", "Ausentes", "Retirados"],
+                        datasets: [
+                          {
+                            label: "Cantidad",
+                            backgroundColor: ["#3e95cd", "#ff6347","#585858"],
+                            data: [datos.presente,datos.ausente,datos.saliendo]
+                          }
+                        ]
+                      },
+                      options: {
+                        legend: { display: false },
+                        title: {
+                          fontSize: 40,
+                          display: true,
+                          text: 'Alumnos'
+                        }
+                      }
+
+                    });
+                  });
+                }
+            $('#open_cf').click(function(){
+              $.ajax({
+                method: "GET",
+                url: "/mis_alumnos_presentes/",
+              })
+                .done(function(data){
+                  $("#contenido2")[0].innerHTML = data;
+                });
+            });
+            $('#ver_formularios').click(function(){
+              $.ajax({
+                method: "GET",
+                url: "/mis_formularios/",
+              })
+                .done(function(data){
+                  $("#contenido2")[0].innerHTML = data;
+                });
+            });
+          });
+      </script>
+      <script type="text/javascript">
+          function drawChart(data) {
+              var data = google.visualization.arrayToDataTable([
+                ['Task', 'Hours per Day'],
+                ['Presemte', data.presente],
+                ['Ausente', data.ausente],
+                ['Saliendo', data.saliendo],
+              ]);
+
+              var options = {
+                title: 'My Daily Activities',
+                is3D: true,
+              };
+
+              var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+              chart.draw(data, options);
+            }
+
+            function alumnos_presentes(){
+              $( "#alumnos_presentes" ).load(window.location.href + " #alumnos_presentes" );
+            }
+
+            function traer(url, alum) {
+             //alert("soquetes");
+             $.ajax({
+               method: "POST",
+               url: url,
+               data: {
+                 csrfmiddlewaretoken: '{{ csrf_token }}'
+               }
+             })
+               .done(function (data) {
+                  $("#datos").html(data);
+                  document.getElementById('id01').style.display='block';
+               });
+           };
+
+               function cerrar() {
+                   var modal = document.getElementById('id01');
+                   modal.style.display = "none";
+                 }
+
+              function pres(url, alum) {
+          		 $.ajax({
+          			 method: "POST",
+          			 url: url,
+          			 data: {
+          				 csrfmiddlewaretoken: '{{ csrf_token }}'
+          			 }
+          		 })
+          			 .done(function (data) {
+          				 	$("#datos").html(data);
+          					document.getElementById('id01').style.display='block';
+          			 });
+          	 };
+
+             function crear_f2(url, alum) {
+              $.ajax({
+                method: "POST",
+                url: url,
+                data: {
+                  csrfmiddlewaretoken: '{{ csrf_token }}'
+                }
+              })
+                .done(function (data) {
+                   id01.style.visibility = "hidden"
+                   Materialize.toast("Formulario Creado", 1000, 'blue')
+                   alumnos_presentes()
+                });
+            };
+
+            function datos_formulario_preceptor(url, formu) {
+             $.ajax({
+               method: "POST",
+               url: url,
+               data: {
+                 csrfmiddlewaretoken: '{{ csrf_token }}'
+               }
+             })
+               .done(function (data) {
+                 $("#datos2").html(data);
+                document.getElementById('id02').style.display='block';
+               });
+           };
+
+            function crear_f3(url, alum) {
+             $.ajax({
+               method: "POST",
+               url: url,
+               data: {
+                 csrfmiddlewaretoken: '{{ csrf_token }}'
+               }
+             })
+               .done(function (data) {
+                  id01.style.visibility = "hidden"
+                  Materialize.toast("Formulario Creado", 1000, 'green')
+                  alumnos_presentes()
+               });
+           };
+
+                      function datos_formulario2(url, formu) {
+             $.ajax({
+               method: "POST",
+               url: url,
+               data: {
+                 csrfmiddlewaretoken: '{{ csrf_token }}'
+               }
+             })
+               .done(function (data) {
+                 $("#datos2").html(data);
+                document.getElementById('id02').style.display='block';
+               });
+           };
+           function datos_formulario3(url, formu) {
+            $.ajax({
+              method: "POST",
+              url: url,
+              data: {
+                csrfmiddlewaretoken: '{{ csrf_token }}'
+              }
+            })
+              .done(function (data) {
+                $("#datos2").html(data);
+               document.getElementById('id02').style.display='block';
+              });
+          };
+      </script>
+</html>

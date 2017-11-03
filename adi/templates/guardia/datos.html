@@ -1,0 +1,47 @@
+<header class="w3-container w3-teal indigo darken-2"  >
+  <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+  <h2 class="center">DATOS</h2>
+</header>
+
+<style>
+#h2{
+	color: #283593;
+}
+	
+span.style{
+	font-family: fantasy;
+    font-weight: bold;
+    font-size: 1em;
+
+}
+
+a.style{
+	font-family: medium; 
+	font-size: large;
+}
+
+#preceptor{
+	position: absolute;
+	top: 66%;
+	right: 80%;
+}
+
+#alumno{
+	position: absolute;
+	top: 66%;
+	left: 43%;
+}
+
+#fecha{
+	position: absolute;
+	top: 66%;
+	left: 80%;
+}
+
+</style>
+
+<div class="w3-container" style="margin-top:5%;">
+  <center><span class="style" id ="preceptor"><a class="style" style="color: #303f9f">Preceptor:</a> {{form.preceptor}}</span></center>
+  <center><span class="style" id ="alumno"><a class="style" style="color: #303f9f">Alumno:</a> {{form.alumno}}</span></center>
+  <center><span class="style" id ="fecha"><a class="style" style="color: #303f9f">Horario:</a> {{form.estado}}</span></center>
+</div>

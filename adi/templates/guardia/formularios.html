@@ -1,0 +1,139 @@
+<head>
+	{% load static %}
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css">
+    <!-- Compiled and minified JavaScript -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+          
+        #f3{
+            margin-right: 10%;
+            position: absolute;
+            bottom: 35%;
+            left: 64%;
+        }
+        .info{
+            position: absolute;
+            top: 6%;
+            right: 6%;
+        }
+
+        .btnRechazarf2{
+            position: absolute;
+            right: 8%;
+        }
+
+        .btnRechazarf3{
+            position: absolute;
+            right: 8%;
+        }
+        .toLeft12px {
+            text-align: left;
+            font-size: 10px;
+        }
+        .toRight12px {
+            text-align: right;
+            font-size: 12px;
+        }
+        .only12px {
+            font-size: 12px;
+        }
+        .justify12px {
+            font-size: 12px;
+            text-align: justify;
+            text-justify: inter-word;
+        }
+    </style>
+</head>
+
+<body bgcolor="orange">
+    <br><br>
+    
+    <div class="container">
+        <div class="section">
+            <div class="row center">
+            <!-- Todos los F2 -->
+                <div class="col s6">
+                    <div class="card hoverable">
+                <!-- Contenido de la carta, info del f2 creado-->
+                        <div class="card-content">
+                            <!-- Titulo de la carta -->
+                            <span class="card-title center"><h1>Formularios 2</h1></span>
+                            <!-- Listado de cartas con los f2 de los alumnos -->
+                            <div class="container">
+                                <div id= "primero">
+                                    <br>
+                                    {% for forms2 in todos_los_f2 %}
+                                        <div class="card indigo z-depth-5" style="background-color: royalblue">
+                                            <!-- Contenido -->
+                                            <div style="color:#ffffff">
+                                            <center><span class="card-title">F2</span></center>
+                                            </div>
+                                            <div class="card-content white-text">
+                                            <center><p>{{forms2.alumno.apellido|upper}} {{forms2.alumno.nombre}} - Curso: {{forms2.alumno.curso}}</p></center>
+                                            <br>
+                                            <i  onclick="datos_formulario_guardia('{% url 'datos_formulario_guardia' forms2.id %}', {{forms2.id}})" id="myBtn"  class="material-icons white-text text-darken-2 info">info</i>
+                                            <a align="left" onclick="aceptar_formulario('{% url 'aceptar_formulario' forms2.id %}', {{forms2.id}})" id="myBtn"  class="waves-effect waves-light btn green darken-3">
+                                            <i class="material-icons">thumb_up</i>
+                                            </a>
+                                            <a onclick="rechazar_formulario('{% url 'rechazar_formulario' forms2.id %}', {{forms2.id}})" id="myBtn"  class="waves-effect waves-light btn red darken-4 btnRechazarf2">
+                                            <i class="material-icons">thumb_down</i>
+                                            </a>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+              
+                <div class="col s6">
+                    <div class="card hoverable">
+                        <!-- Contenido de la carta, info del f3 creado-->
+                        <div class="card-content">
+                            <!-- Titulo de la carta -->
+                            <span class="card-title center"><h1>Formularios 3</h1></span>
+                            <!-- Listado de cartas con los f3 de los alumnos -->
+                            <div class="container">
+                                <div id= "segundo">
+                                <br>
+                                    {% for forms3 in todos_los_f3 %}
+                                        <div class="card yellow lighten-1 z-depth-5">
+                                            <!-- Contenido -->
+                                            <div style="color:black">
+                                                <center><span class="card-title">F3</span></center>
+                                            </div>
+                                            <div class="card-content black-text">
+                                                <center><p>{{forms3.alumno.apellido|upper}} {{forms3.alumno.nombre}} - Curso: {{forms3.alumno.curso}}</p></center>
+                                                <br>
+                                                <i onclick="datos_formulario_guardia('{% url 'datos_formulario_guardia' forms3.id %}', {{forms3.id}})" id="myBtn" class="material-icons black-text text-darken-2 info">info</i>
+                                                <a onclick="aceptar_formulario('{% url 'aceptar_formulario' forms3.id %}', {{forms3.id}})" id="myBtn"  class="waves-effect waves-light btn green darken-3"><i class="material-icons">thumb_up</i>
+                                                </a>
+                                                <a onclick="rechazar_formulario('{% url 'rechazar_formulario' forms3.id %}', {{forms3.id}})" id="myBtn"  class="waves-effect waves-light btn red darken-4 btnRechazarf3"><i class="material-icons ">thumb_down</i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="id01" class="w3-modal">
+        <div class="w3-modal-content" id="datos">
+        </div>
+    </div>
+
+</body>
+
