@@ -59,16 +59,26 @@
 				.input-field .prefix.active {
 					color: blue;
 				}
+				/*titulo que acompaña al isotipo en login*/
+				.logtip{
+					position: relative;
+						top: 0%;
+						right: 42%;
+				}
+				/*Posicion del Isotipo en login*/
+				.isotip{
+					position: relative;
+						left: 42%;
+				}
 		</style>
 	</head>
 	<body style="background-color: #3a2993">
 		<!-- Navbar -->
 		<nav style="background-color: #32237d" role="navigation">
-			<div class="nav-wrapper z-depth-3">
+		  	<div class="nav-wrapper z-depth-3">
 				<!-- Logo y título centrado -->
-				<a id="logo-container" data-target="modal1" onclick="abrir_modal()" class="brand-logo center modal-trigger">
-					<i class="material-icons prefix" style="font-size: 45px">assignment</i> ADI - Log In
-				</a>
+				<a href="{% url 'index' %}" class="brand-logo isotip"><i class="material-icons prefix" style="font-size: 45px">assignment</i></a>
+				<a id="logo-container" data-target="modal1" onclick="abrir_modal()" class="brand-logo logtip modal-trigger">ADI - Log In</a>
 			</div>
 		</nav>
 		<!-- Formulario para el Login-->
