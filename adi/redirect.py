@@ -12,7 +12,7 @@ from .decorators import *
 #El user_passes_test sirve para que si la funcion check_preceptor devuelve True sigue , sino corre el login_url='login_p'.
 @user_passes_test(check_preceptor, login_url='/')
 def preceptor(request):
-    return render (request, 'preceptor/index2.html')
+    return render (request, 'preceptor/index.html')
 
 #@user_passes_test(check_guardia, login_url='/')
 def index_guardia(request):
