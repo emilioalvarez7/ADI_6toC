@@ -155,7 +155,7 @@ def aceptar_formulario(request, alum_t):
         formulario.estado="Finalizado"
         formulario.save()
         data = {
-            'estado': al.nombre + " aceptado"
+            'estado': al.nombre + " aceptado",
         }
     else:
         data = {
@@ -170,12 +170,12 @@ def rechazar_formulario(request, alum_t):
     nom = formulario.alumno.nombre
     al = Alumno.objects.get(nombre=nom)
     if al:
-        al.estado="Indefinido"
-        al.save()
+        #al.estado="Indefinido"
+        #al.save()
         formulario.estado="Rechazado"
         formulario.save()
         data = {
-            'estado': al.nombre + " RECHAZADO"
+            'estado': al.nombre + " RECHAZADO",
         }
     else:
         data = {

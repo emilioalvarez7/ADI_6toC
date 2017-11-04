@@ -1,17 +1,17 @@
 <head>
-	{% load static %}
+    {% load static %}
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css">
     <!-- Compiled and minified JavaScript -->
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
-        crossorigin="anonymous"></script>
+            crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"></script>
-		<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style>
-          
+
         #f3{
             margin-right: 10%;
             position: relative;
@@ -64,80 +64,79 @@
 
 <body bgcolor="orange">
     <br><br>
-    
+
     <div class="container">
         <div class="section">
             <div class="row center">
-            <!-- Todos los F2 -->
+                <!-- Todos los F2 -->
                 <div class="col s6">
                     <div class="card hoverable">
-                <!-- Contenido de la carta, info del f2 creado-->
+                        <!-- Contenido de la carta, info del f2 creado-->
                         <div class="card-content">
                             <!-- Listado de cartas con los f2 de los alumnos -->
                             <div class="container">
-                                <div id= "primero">
-                                    <br>
-                                            <!-- Cartas F2 -->
-                                    {% for forms2 in todos_los_f2 %}
-                                        <div class="card indigo z-depth-5" style="background-color: royalblue">
-                                            <!-- Contenido -->
-                                            <div style="color:#ffffff">
+                                <br>
+                                <!-- Cartas F2 -->
+                                {% for forms2 in todos_los_f2 %}
+                                <div id="primero">
+                                    <div class="card indigo z-depth-5" style="background-color: royalblue">
+                                        <!-- Contenido -->
+                                        <div style="color:#ffffff">
                                             <center><span class="card-title">F2</span></center>
-                                            </div>
-                                            <!-- Info del f2 -->
-                                            <div class="card-content white-text">
+                                        </div>
+                                        <!-- Info del f2 -->
+                                        <div class="card-content white-text">
                                             <center><p>{{forms2.alumno.apellido|upper}} {{forms2.alumno.nombre}} - Curso: {{forms2.alumno.curso}}</p></center>
                                             <br>
                                             <!-- Boton Informacion -->
                                             <i  onclick="datos_formulario_guardia('{% url 'datos_formulario_guardia' forms2.id %}', {{forms2.id}})" id="myBtn"  class="material-icons white-text text-darken-2 info">info</i>
                                             <!-- Boton Aceptar -->
                                             <a align="left" onclick="aceptar_formulario('{% url 'aceptar_formulario' forms2.id %}', {{forms2.id}})" id="myBtn"  class="waves-effect waves-light btn green darken-3 btnAceptarf2">
-                                            <i class="material-icons">thumb_up</i>
+                                                <i class="material-icons">thumb_up</i>
                                             </a>
                                             <!-- Boton Rechazar -->
                                             <a onclick="rechazar_formulario('{% url 'rechazar_formulario' forms2.id %}', {{forms2.id}})" id="myBtn"  class="waves-effect waves-light btn red darken-4 btnRechazarf2">
-                                            <i class="material-icons">thumb_down</i>
+                                                <i class="material-icons">thumb_down</i>
                                             </a>
-                                            </div>
                                         </div>
-                                    {% endfor %}
+                                    </div>
                                 </div>
+                                {% endfor %}
                             </div>
                         </div>
                     </div>
                 </div>
-              
                 <div class="col s6">
                     <div class="card hoverable">
                         <!-- Contenido de la carta, info del f3 creado-->
                         <div class="card-content">
                             <!-- Listado de cartas con los f3 de los alumnos -->
                             <div class="container">
-                                <div id= "segundo">
                                 <br>
-                                            <!-- Cartas F3 -->
-                                    {% for forms3 in todos_los_f3 %}
-                                        <div class="card yellow lighten-1 z-depth-5">
-                                            <!-- Contenido -->
-                                            <div style="color:black">
-                                                <center><span class="card-title">F3</span></center>
-                                            </div>
-                                            <!-- Info del f3 -->
-                                            <div class="card-content black-text">
-                                                <center><p>{{forms3.alumno.apellido|upper}} {{forms3.alumno.nombre}} - Curso: {{forms3.alumno.curso}}</p></center>
-                                                <br>
-                                                <!-- Boton Informacion -->
-                                                <i onclick="datos_formulario_guardia('{% url 'datos_formulario_guardia' forms3.id %}', {{forms3.id}})" id="myBtn" class="material-icons black-text text-darken-2 info">info</i>
-                                                <!-- Boton Aceptar -->
-                                                <a onclick="aceptar_formulario('{% url 'aceptar_formulario' forms3.id %}', {{forms3.id}})" id="myBtn"  class="waves-effect waves-light btn green darken-3 btnAceptarf3"><i class="material-icons">thumb_up</i>
-                                                </a>
-                                                <!-- Boton Rechazar -->
-                                                <a onclick="rechazar_formulario('{% url 'rechazar_formulario' forms3.id %}', {{forms3.id}})" id="myBtn"  class="waves-effect waves-light btn red darken-4 btnRechazarf3"><i class="material-icons ">thumb_down</i>
-                                                </a>
-                                            </div>
+                                <!-- Cartas F3 -->
+                                {% for forms3 in todos_los_f3 %}
+                                <div id= "segundo">
+                                    <div class="card yellow lighten-1 z-depth-5">
+                                        <!-- Contenido -->
+                                        <div style="color:black">
+                                            <center><span class="card-title">F3</span></center>
                                         </div>
-                                    {% endfor %}
+                                        <!-- Info del f3 -->
+                                        <div class="card-content black-text">
+                                            <center><p>{{forms3.alumno.apellido|upper}} {{forms3.alumno.nombre}} - Curso: {{forms3.alumno.curso}}</p></center>
+                                            <br>
+                                            <!-- Boton Informacion -->
+                                            <i onclick="datos_formulario_guardia('{% url 'datos_formulario_guardia' forms3.id %}', {{forms3.id}})" id="myBtn" class="material-icons black-text text-darken-2 info">info</i>
+                                            <!-- Boton Aceptar -->
+                                            <a onclick="aceptar_formulario('{% url 'aceptar_formulario' forms3.id %}', {{forms3.id}})" id="myBtn"  class="waves-effect waves-light btn green darken-3 btnAceptarf3"><i class="material-icons">thumb_up</i>
+                                            </a>
+                                            <!-- Boton Rechazar -->
+                                            <a onclick="rechazar_formulario('{% url 'rechazar_formulario' forms3.id %}', {{forms3.id}})" id="myBtn"  class="waves-effect waves-light btn red darken-4 btnRechazarf3"><i class="material-icons ">thumb_down</i>
+                                            </a>
+                                        </div>
+                                    </div>
                                 </div>
+                                {% endfor %}
                             </div>
                         </div>
                     </div>
@@ -145,7 +144,7 @@
             </div>
         </div>
     </div>
-    
+
     <div id="id01" class="w3-modal">
         <div class="w3-modal-content" id="datos">
         </div>
