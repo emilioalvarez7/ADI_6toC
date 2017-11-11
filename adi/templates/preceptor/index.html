@@ -5,160 +5,136 @@
         <title>Preceptor</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.min.js"></script>
-        <style>              
+        <style>
             
-            .navbar {
-                margin-bottom: 0;
-                border-radius: 0;
-                height: 100%;
-                background-color: #ff6666;
-                border-color: #ff6666;
-                padding:20px !important; 
-            }
-            
-            #toast{
-                  position:fixed;
-                  top:10;
-                  left:90%;
-                  transform:translate(-50%);
-                  background-color:#80ff80;
-                  color:#fff;
-                  padding:16px;
-                  border-radius:4px;
-                  text-align:center;
-                  z-index:1;
-                  box-shadow:0 0 20px rgba(0,0,0,0.3);
-                  visibility:visible;
-                  opacity:0;
+            body {
+                padding-top:20px;
+                margin-left:0px;
             }
 
-            #toast.show{
-              visibility:visible;
-              animation:fadeInOut 3s;
-            }
-
-            @keyframes fadeInOut{
-              5%,95%{opacity:1;top:50px}
-              15%,85%{opacity:1;top:30px}
-            }
-            
-             body {
-                background-color: #ffffff;
-            }
-            
-            a:link, a:visited {
-                color: #ffffff;
-                text-decoration:none; 
-            }
-
-            a:link:active, a:visited:active {
-                color: #ffffff;
-            }
-                     
-            .row.content {
-                height: 800px
-            }
-            
-            .sidenav {
-                padding-top: 10px;
-                background-color: #ff6666;
-                height: 100%;
-            }
-            @media screen and (max-width: 767px) {
-            .sidenav {
-              height: auto;
-              padding: 1px;
-            }
-            .row.content {height:auto;} 
-
-            .center{
-                float: left;
-                width: 33.3%;
-                text-align: center;
-            }
-                
-            #mya {
-                color: #ff6600;
-            }
-                
-            input[type="radio"], input[type="checkbox"] {
-                line-height: normal;
+            ul {
+                list-style-type: none;
                 margin: 0;
+                padding: 0;
+                width: 11.4%;
+                background-color: #ffff99;
+                position: fixed;
+                height: 100%;
+                overflow: auto;
             }
-                    
+
+            li a {
+                display: block;
+                color: #000;
+                padding: 8px 16px;
+                text-decoration: none;
+            }
+
+            li a.active {
+                background-color: #4CAF50;
+                color: white;
+            }
+
+            li a:hover:not(.active) {
+                background-color: #555;
+                color: white;
+            }
+
+            .navbar {
+                overflow: hidden;
+                background-color: #333;
+                position: fixed; /* Set the navbar to fixed position */
+                top: 0; /* Position the navbar at the top of the page */
+                width: 100%; /* Full width */
+            }
+
+            .navbar a {
+              float: left;
+              font-size: 16px;
+              color: white;
+              text-align: center;
+              padding: 14px 16px;
+              text-decoration: none;
+            }
+
+
+
         </style>
     </head>
     <body>
-        
-        <!--
-        
-        <nav class="navbar navbar-inverse">
-            <div class="container-fluid">
-                <div class="navbar-left">
-                    <a class="navbar-brand" href="#">{{user|upper}}</a>
-                </div>
-                <form class="navbar-form navbar-right">
-                    <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Search">
-                    </div>
-                    <button type="submit" class="btn btn-default">Submit</button>
-                </form>
-            </div>
-        </nav> 
-          
-        -->
-        <div id="toast">HOLAHOLAHOLA</div>
-        
-        <div class="container-fluid text-center">    
-            <div class="row content">
-                <div class="col-sm-2 sidenav">
-                    <br>
-                    <br>
-                    <p><a id="" href="{% url 'logout_p' %}">Salir</a></p>
-                    <br>
-                    <br>
-                    <p><a id="mis_alumnos" href="#">Mis Alumnos</a></p>
-                    <br>
-                    <br>
-                    <p><a id="crear_formularios" href="#">Crear Formulario</a></p>
-                    <br>
-                    <br>
-                    <p><a id="mis_formularios" href="#">Ver Formularios</a></p>
-                    <br>
-                    <br>
-                    <p><a id="charts" href="#">Datos</a></p>
-                    <br>
-                    <br>
-                    <p><a id="asistencia" href="#">Asistencia</a></p>
-                    <br>
-                    <br>
-                </div>
-                <div id="contenido2" class="center" align="center"></div>
-                <div class="containter">
-                    <canvas id="chart1"></canvas>
-                </div>
-                <canvas id="chart2" width="10%" height="10%"></canvas>
-            </div>
+
+
+        <div class="navbar">
+          <a href="#"></a>
+          <a href="#news">News</a>
+          <a id="" href="{% url 'logout_p' %}">Salir</a>
         </div>
         
-        <div id="toast"></div>
+        <br>
+        <ul>
+            <li></li>
+            <br>
+            <br>
+            <li><a id="mis_alumnos" href="#">Mis Alumnos</a></li>
+            <br>
+            <br>
+            <li><a id="crear_formularios" href="#">Crear Formulario</a></li>
+            <br>
+            <br>
+            <li><a id="mis_formularios" href="#">Ver Formularios</a></li>
+            <br>
+            <br>
+            <li><a id="charts" href="#">Datos</a></li>
+            <br>
+            <br>
+            <li><a id="asistencia" href="#">Asistencia</a></li>
+        </ul>
+
+        <div class="main">
+  <h1>Fixed Bottom Menu</h1>
+  <h2>Scroll this page to see the effect</h2>
+  <h2>The navigation bar will stay at the bottom of the page while scrolling</h2>
+
+  <p>Some text some text some text some text..</p>
+  <p>Some text some text some text some text..</p>
+  <p>Some text some text some text some text..</p>
+  <p>Some text some text some text some text..</p>
+  <p>Some text some text some text some text..</p>
+  <p>Some text some text some text some text..</p>
+  <p>Some text some text some text some text..</p>
+  <p>Some text some text some text some text..</p>
+  <p>Some text some text some text some text..</p>
+  <p>Some text some text some text some text..</p>
+  <p>Some text some text some text some text..</p>
+  <p>Some text some text some text some text..</p>
+  <p>Some text some text some text some text..</p>
+  <p>Some text some text some text some text..</p>
+  <p>Some text some text some text some text..</p>
+  <p>Some text some text some text some text..</p>
+  <p>Some text some text some text some text..</p>
+  <p>Some text some text some text some text..</p>
+  <p>Some text some text some text some text..</p>
+  <p>Some text some text some text some text..</p>
+</div>
         
+        <div id="contenido2"></div>
+
+        <div id="toast"></div>
+
         <div id="id02" class="w3-modal">
             <div class="modal-dialog modal-sm" id="datos2">
             </div>
         </div>
-        
-        
-        
+
+
+
         <div class="modal fade bd-example-modal-sm" id="datos" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria hidden="true">
             <div class="modal-dialog modal-sm"></div>
         </div>
-        
+
     </body>
 
     <script type="text/javascript">
@@ -168,7 +144,7 @@
                     method: "GET",
                     url: "/mis_alumnos/",
                 })
-                .done(function(data){
+                    .done(function(data){
                     $("#contenido2")[0].innerHTML = data;
                 });
             });
@@ -177,7 +153,7 @@
                     method: "GET",
                     url: "/mis_formularios/",
                 })
-                .done(function(data){
+                    .done(function(data){
                     $("#contenido2")[0].innerHTML = data;
                 });
             });
@@ -186,7 +162,7 @@
                     method: "GET",
                     url: "/mis_alumnos_presentes/",
                 })
-                .done(function(data){
+                    .done(function(data){
                     $("#contenido2")[0].innerHTML = data;
                 });
             });
@@ -195,7 +171,7 @@
                     method: "GET",
                     url: "/faltas/",
                 })
-                .done(function(data){
+                    .done(function(data){
                     $("#contenido2")[0].innerHTML = data;
                 });
             });
@@ -204,9 +180,9 @@
                     method: "GET",
                     url: "/estadisticas_alumno/",
                 })
-                .done(function(datos){
+                    .done(function(datos){
                     new Chart(document.getElementById("chart1"), 
-                        {
+                              {
                         height: 260,
                         type: 'horizontalBar',
                         data: {
@@ -229,9 +205,9 @@
                             }
                         }
                     })
-                    
+
                     new Chart(document.getElementById("chart2"), 
-                        {
+                              {
                         type: 'pie',
                         data: {
                             labels: ["Presentes", "Ausentes", "Retirados"],
@@ -259,24 +235,24 @@
     </script>
     <script>
         function traer(url, alum) {
-         //alert("soquetes");
-         $.ajax({
-           method: "POST",
-           url: url,
-           data: {
-             csrfmiddlewaretoken: '{{ csrf_token }}'
-           }
-         })
-           .done(function (data) {
-              $("#datos").html(data);
-              document.getElementById('id01').style.display='block';
-           });
-       };
-        
-        
+            //alert("soquetes");
+            $.ajax({
+                method: "POST",
+                url: url,
+                data: {
+                    csrfmiddlewaretoken: '{{ csrf_token }}'
+                }
+            })
+                .done(function (data) {
+                $("#datos").html(data);
+                document.getElementById('id01').style.display='block';
+            });
+        };
+
+
         function cerrar() {
-           var modal = document.getElementById('id01');
-           modal.style.display = "none";
+            var modal = document.getElementById('id01');
+            modal.style.display = "none";
         }
 
         function pres(url, alum) {
@@ -286,11 +262,11 @@
                 data: {
                     csrfmiddlewaretoken: '{{ csrf_token }}'
                 }
-             })
-            .done(function (data) {
+            })
+                .done(function (data) {
                 $("#datos").html(data);
                 $('#datos').modal('show');
-                
+
             });
         };
 
@@ -300,20 +276,20 @@
                 method: "POST",
                 url: url,
                 data: {
-                  csrfmiddlewaretoken: '{{ csrf_token }}'
+                    csrfmiddlewaretoken: '{{ csrf_token }}'
                 }
             })
-            .done(function (data) {
+                .done(function (data) {
                 $('#datos').modal('hide');
                 var x=document.getElementById("toast");
-                    x.classList.add("show");
-                    x.innerHTML="Creado";
-                    setTimeout(function(){
-                        x.classList.remove("show");
-                    },3000);
+                x.classList.add("show");
+                x.innerHTML="Creado";
+                setTimeout(function(){
+                    x.classList.remove("show");
+                },3000);
             });  
         };
-        
+
         function datos_formulario_preceptor(url, formu) {
             $.ajax({
                 method: "POST",
@@ -323,9 +299,9 @@
                 }
             })
                 .done(function (data) {
-                    $("#datos2").html(data);
-                    document.getElementById('id02').style.display='block';
-                });
+                $("#datos2").html(data);
+                document.getElementById('id02').style.display='block';
+            });
         };
 
         function datos_formulario(url, formu) {
@@ -337,10 +313,10 @@
                     csrfmiddlewaretoken: '{{ csrf_token }}'
                 }
             })
-            .done(function (data) {
+                .done(function (data) {
                 $("#datos2").html(data);
                 document.getElementById('id02').style.display='block';
-           });
+            });
         };
     </script>
 </html>
