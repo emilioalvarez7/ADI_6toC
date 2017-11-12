@@ -279,3 +279,8 @@ def mis_formularios(request):
         forms2 = None
         forms3 = None
     return render(request,'preceptor/formularios/mis_formularios.html',{'todos_los_f3':forms3, 'todos_los_f2':forms2})
+
+
+def perfil_hijo(request, dni_alumno):
+    alumno = Alumno.objects.get(dni=dni_alumno)
+    return render (request, 'padre-tutor/menu.html', {'alum':alumno})

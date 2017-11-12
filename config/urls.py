@@ -33,6 +33,7 @@ urlpatterns = [
     url(r'^elegir_formulario/(\d+)$', elegir_formulario, name="elegir_formulario"),
     url(r'^datos_formulario_guardia/(\d+)$', datos_formulario_guardia, name="datos_formulario_guardia"),
     url(r'^datos_formulario_preceptor/(\d+)$', datos_formulario_preceptor, name="datos_formulario_preceptor"),
+    url(r'^perfil_hijo/(\d+)$', perfil_hijo, name="perfil_hijo"),
     url(r'^volver/(\d+)$', volver, name="volver"),
 
     #URL de funciones sin ID.
