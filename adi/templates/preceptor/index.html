@@ -148,7 +148,7 @@
 
 
         <div class="navbar">
-            <a >Salir</a>
+            <a >{{user|title}}</a>
             <a style="float:right" href="{% url 'logout_p' %}">Salir</a>
         </div>
 
@@ -186,6 +186,9 @@
     </body>
 
     <script type="text/javascript">
+
+        var modal = document.getElementById('myModal');
+
         $(document).ready(function(){
             $('#mis_alumnos').click(function(){
                 $.ajax({
@@ -280,10 +283,6 @@
                 })
             });
         });
-    </script>
-    <script>
-
-        var modal = document.getElementById('myModal');
 
         function traer(url, alum) {
             //alert("soquetes");
