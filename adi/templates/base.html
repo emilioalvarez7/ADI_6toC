@@ -1,0 +1,41 @@
+<!DOCTYPE=html>
+{% load static %}
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>{% block title %}{% endblock title%} | ADI</title>
+    <!-- load Ink's CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'ink-3.1.10//css/ink-flex.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'ink-3.1.10/css/font-awesome.min.css' %}">
+
+    <!-- load Ink's CSS for IE8 -->
+    <!--[if lt IE 9 ]>
+        <link rel="stylesheet" href="{% static 'ink-3.1.10/css/ink-ie.min.css' %}" type="text/css" media="screen" title="no title" charset="utf-8">
+    <![endif]-->
+
+    <!-- test browser flexbox support and load legacy grid if unsupported -->
+    <script type="text/javascript" src="{% static 'ink-3.1.10/js/modernizr.js' %}"></script>
+    <script type="text/javascript">
+        Modernizr.load({
+          test: Modernizr.flexbox,
+          nope : "{% static 'ink-3.1.10/css/ink-legacy.min.css' %}"
+        });
+    </script>
+    <!-- Load the js files -->
+    <script type="text/javascript" src="{% static 'ink-3.1.10/js/holder.js' %}"></script>
+    <script type="text/javascript" src="{% static 'ink-3.1.10/js/ink-all.min.js' %}"></script>
+    <!-- Autoload is required for the examples on this page. Read more below. -->
+    <script type="text/javascript" src="{% static 'ink-3.1.10/js/autoload.js' %}"></script>
+    <script type="text/javascript">
+      Ink.requireModules(
+        ['Ink.Dom.Css_1'],
+        function(Css) {
+          var elm = Ink.s('.ink');
+          Css.addClassName(elm,'hot');
+        }
+      );
+    </script>
+    <script src="{% static 'jquery-3.2.1.min.js' %}"></script>
+  </head>
+    {% block content %}{% endblock content %}
+</html>

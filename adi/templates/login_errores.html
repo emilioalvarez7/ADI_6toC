@@ -1,0 +1,37 @@
+<!DOCTYPE=html>
+{% extends 'base.html' %}
+{% block title %}LOGIN ERROR{% endblock title %}
+{% block content %}
+<style>
+    html, body {
+        height: 100%;
+    }
+    body {
+        background: black; /*#ededed; */
+        text-align: center;
+    }
+    .main {
+        height: 100%;
+        width: 100%;
+        display: table;
+    }
+    .wrapper {
+        display: table-cell;
+        height: 100%;
+        vertical-align: middle;
+    }
+</style>
+<div class="main">
+  <div class="wrapper">
+    <div class="ink-grid">
+      <div class="column-group push-center push-middle">
+        <div class="ink-alert block error" role="alert">
+          <h4 style="padding-right: 0px; padding-left: 0px">ACCESO NO IDENTIFICADO</h4>
+          <p><strong>Usted no puede acceder a este sitio debido a que no pertenece a un grupo de usuarios establecidos por el administrador.</strong></p>
+          <a class="ink-button whitesmoke" href="{% url 'inicio' %}">Ir a inicio</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

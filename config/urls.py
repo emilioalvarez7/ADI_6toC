@@ -9,10 +9,15 @@ from django.conf.urls import url, include
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     #URL para carga de Template.
-    url(r'^menu/$', inicio),
-    url(r'^$', index, name="index"),
-    url(r'^login/$', auth_views.login, {'template_name': 'login.html'}, name="login_p"),
-    url(r'^logout/$', auth_views.logout, {'template_name': 'logged_out.html'}, name="logout_p"),
+    url(r'^menu/$', inicio, name="inicio"),
+    url(r'^login_success/$', login_success, name='login_redirect'),
+    url(r'^$', auth_views.login, {'template_name': 'login.html'}, name="login"),
+    url(r'^logout/$', auth_views.logout, name="logout"),
+    #DIRECTOR
+    url(r'^director/', director, name="director"),
+    #ERROR PARA LA INEXISTENCIA DE GRUPOS
+    url(r'^error/', login_error, name="errores"),
+
     url(r'^index_guardia/$', index_guardia, name="index_guardia"),
     url(r'^preceptor/$', preceptor, name="cambio"),
     url(r'^guardia/$', guardia, name="cambio2"),

@@ -10,7 +10,7 @@ from .models import *
 from .decorators import *
 
 #El user_passes_test sirve para que si la funcion check_preceptor devuelve True sigue , sino corre el login_url='login_p'.
-@user_passes_test(check_preceptor, login_url='/')
+@user_passes_test(check_Preceptor)
 def preceptor(request):
     return render (request, 'preceptor/index.html')
 
@@ -22,10 +22,6 @@ def index_guardia(request):
 def cpreceptor(request):
     return render(request, 'admin/crear_preceptor.html')
 
-def index(request):
-    return render (request, "inicio.html")
-    #return render (request, "toast.html")
-
 def chalumno(request):
     return render(request, 'admin/modificar_alumno.html')
 
@@ -36,7 +32,22 @@ def guardia(request):
     return render(request, 'guardia.html')
 
 def inicio(request):
-    return render(request, 'index.html')
+    return render(request, 'inicio.html')
 
 def login_p(request):
     return render(request, 'login.html')
+
+#DIRECTOR
+@user_passes_test(check_Director)
+def director(request):
+    print 'VISTA DEL DIRECTOR'
+    grupos = Group.objects.all()
+    cursos = Curso.objects.all()
+    preceptores = Preceptor.objects.all().order_by('nombre', 'apellido', 'cursos__anuario', 'cursos__division')
+    return render(
+        request,
+        'admin/director.html',
+        {'todos_los_preceptores': preceptores,
+        'todos_los_grupos': grupos,
+        'todos_los_cursos': cursos}
+)

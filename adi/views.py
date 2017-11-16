@@ -60,7 +60,7 @@ def datos_formulario_preceptor(request, id_for):
         return render(request,
                   'preceptor/formularios/datos_f3.html',
                   {'forms3':formi})
-    
+
 def crear_f3(request, dni_alumno):
     #Tomamos al usuario loggueado
     pepe = request.user
@@ -279,3 +279,31 @@ def mis_formularios(request):
         forms2 = None
         forms3 = None
     return render(request,'preceptor/formularios/mis_formularios.html',{'todos_los_f3':forms3, 'todos_los_f2':forms2})
+
+#Renderizar este template si al loguearse no se encuentra el usuario en un grupo.
+def login_error(request):
+    return render(request, 'login_errores.html')
+
+#FALTA PREVENIR LOGINS DE OTROSS USUARIOS A LOGINS UNICOS DE OTROS USUARIOS
+def login_success(request):
+    """
+    Redirects users based on whether they are in the admins group
+    """
+    if request.user.groups.filter(name="Preceptor").exists():
+        # Si el usuario pertenece al grupo de Preceptor, LOGIN_REDIRECT_URL va a actuar sobre la url 'cambio.'
+        return redirect("cambio")
+
+    if request.user.groups.filter(name="Director").exists():
+        # Si el usuario pertenece al grupo de Director, LOGIN_REDIRECT_URL va a actuar sobre la url 'director'
+        return redirect("director")
+    else:
+        return redirect('errores')
+    """
+    if request.user.groups.filter(name="Alumno_o_Tutor").exists():
+        # Si el usuario pertenece al grupo de Alumno_o_Tutor, LOGIN_REDIRECT_URL va a actuar sobre la url 'alumnos_y_tutores'
+        return redirect("alumnos_y_tutores")
+
+    if request.user.groups.filter(name="Guardia").exists():
+        # Si el usuario pertenece al grupo de Guardia, LOGIN_REDIRECT_URL va a actuar sobre la url 'guardia'
+        return redirect("guardia")
+    """

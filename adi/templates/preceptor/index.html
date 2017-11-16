@@ -149,7 +149,7 @@
 
         <div class="navbar">
             <a >{{user|title}}</a>
-            <a style="float:right" href="{% url 'logout_p' %}">Salir</a>
+            <a style="float:right" href="{% url 'logout' %}">Salir</a>
         </div>
 
         <br>
@@ -232,7 +232,7 @@
                     url: "/estadisticas_alumno/",
                 })
                     .done(function(datos){
-                    new Chart(document.getElementById("chart1"), 
+                    new Chart(document.getElementById("chart1"),
                               {
                         height: 260,
                         type: 'horizontalBar',
@@ -257,7 +257,7 @@
                         }
                     })
 
-                    new Chart(document.getElementById("chart2"), 
+                    new Chart(document.getElementById("chart2"),
                               {
                         type: 'pie',
                         data: {
@@ -337,7 +337,7 @@
                 .done(function (data) {
                 modal.style.display = "hidden";
                 console.log("creado");
-            });  
+            });
         };
 
         function datos_formulario_preceptor(url, formu) {

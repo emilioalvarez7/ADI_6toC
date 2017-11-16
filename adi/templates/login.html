@@ -1,169 +1,67 @@
-<!DOCTYPE html>
-<!-- Cargamos archivos estáticos-->
-{% load static %}
-<html>
-	<head>
-		<!--Importamos Google Icon Font-->
-		<link href="{% static 'materialize/icons/icons.css' %}" rel="stylesheet">
-		<!--Importamos materialize.css-->
-		<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
-				crossorigin="anonymous"></script>
-		<link type="text/css" rel="stylesheet" href="{% static 'materialize/css/materialize.min.css' %}"  media="screen,projection"/>
-		<!--Permitirle al navegador saber si está optimizado para dispositivos móbiles-->
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" charset="utf-8"/>
-		<!-- Agregamos un título a esta plantilla -->
-		<title>Iniciar sesión</title>
-		<!-- HOJA DE ESTILOS PERSONALIZADA INTERNA -->
-		<style>
-				/*** !important was needed for snippet ***/
-				/* Cambiar color de un título al pasar por encima el cursor*/
-				h4 {
-					color:blue;
-				}
-				h4:hover {
-					color: royalblue;
-				}
-				/* label color */
-				.input-field label {
-					color: grey !important;
-				}
-				/* label focus color */
-				.input-field input[type=text]:focus + label {
-					color: blue !important;
-				}
-				/* label underline focus color */
-				.input-field input[type=text]:focus {
-					border-bottom: 1px solid royalblue !important;
-					box-shadow: 0 1px 0 0 royalblue !important;
-				}
-				/* label focus color PASSWORD */
-				.input-field input[type=password]:focus + label {
-					color: blue !important;
-				}
-				/* label underline focus color PASSWORD */
-				.input-field input[type=password]:focus {
-					border-bottom: 1px solid royalblue !important;
-					box-shadow: 0 1px 0 0 royalblue !important;
-				}
-				/* valid color */
-				.input-field input[type=text].valid {
-					border-bottom: 1px solid green;
-					box-shadow: 0 1px 0 0 green;
-				}
-				/* invalid color */
-				.input-field input[type=text].invalid {
-					border-bottom: 1px solid red;
-					box-shadow: 0 1px 0 0 red;
-				}
-				/* icon prefix focus color */
-				.input-field .prefix.active {
-					color: blue;
-				}
-				/*titulo que acompaña al isotipo en login*/
-				.logtip{
-					position: relative;
-						top: 0%;
-						right: 42%;
-				}
-				/*Posicion del Isotipo en login*/
-				.isotip{
-					position: relative;
-						left: 42%;
-				}
-		</style>
-	</head>
-	<body style="background-color: #3a2993">
-		<!-- Navbar -->
-		<nav style="background-color: #32237d" role="navigation">
-		  	<div class="nav-wrapper z-depth-3">
-				<!-- Logo y título centrado -->
-				<a href="{% url 'index' %}" class="brand-logo isotip"><i class="material-icons prefix" style="font-size: 45px">assignment</i></a>
-				<a id="logo-container" data-target="modal1" onclick="abrir_modal()" class="brand-logo logtip modal-trigger">ADI - Log In</a>
-			</div>
-		</nav>
-		<!-- Formulario para el Login-->
-		{% block content %}
-			<form method="POST">
-				{% csrf_token %}
-				<!-- Encerramos los inputs del formulario dentro de una carta -->
-				<div class="row">
-					<div class="container">
-						<br>
-						<div class="container">
-						<div class="col s12">
-							<div class="card whitesmoke z-depth-4">
-								<!-- Contenido superior de la carta -->
-								<div class="card-content">
-										<center><h4>Iniciar Sesión</h4></center>
-								</div>
-								<!-- Sección de acción de la carta-->
-								<div class="card-action" style="text-align:center">
-									<!-- Input para el Username -->
-									<div class="input-field col s11">
-										<i class="material-icons prefix" style="font-size: 40px">account_circle</i>
-										<input style="color:royalblue" name="username" id="account_circle" type="text" class="validate" minlength="4" maxlength="16">
-										<label style="color:royalblue" for="account_circle">Usuario</label>
-									</div>
-									<!-- Input para la Password -->
-									<div class="input-field col s11">
-										<i class="material-icons prefix" style="font-size: 40px">person_pin</i>
-										<input style="color:royalblue" name="password" id="person_pin" type="password" class="validate" minlength="4" maxlength="16">
-										<label style="color:royalblue" for="person_pin">Contraseña</label>
-									</div>
-									<br>
-									<br>
-									<br>
-									<br>
-									<br>
-									<br>
-									<br>
-									<br>
-									<button style="background-color: royalblue" class="btn waves-effect waves-light hoverable" type="submit" name="action">Iniciar sesión
-										<i class="material-icons right">send</i>
-									</button>
-								</div>
-							</div>
-						</div>
-					</div>
-					</div>
-				</div>
-		</form>
-		{% endblock %}
-		<!-- Footer -->
-		<footer class="page-footer z-depth-4" style="background-color: #32237d">
-			<!-- Contenedor de información acerca de nosotros -->
-			<div class="container">
-				<div class="row">
-					<h5 class="white-text">Bio de la empresa</h5>
-					<p class="grey-text text-lighten-4" style="text-align:justify;text-justify:inter-word">Somos un equipo de estudiantes del nivel secundario enfocado a la etapa de aprendizaje en desarrollo de aplicaciones web con Django. ADI busca virtualizar archivos institucionales, reduciendo el papeleo para así mejorar el rendimiento con respecto al manejo de tareas que lleva a cabo una institución escolar.</p>
-				</div>
-			<!-- Contenedor de créditos y copyright -->
-				<div class="footer-copyright z-depth-4" style="background-color:#3a2993">
-					<div class="container" style="text-align: center">Realizado por
-						<b style="color:red">Gonzalo, Javier y Mateo</b> con <a style="color:#ff8484" href="http://materializecss.com/"><b>Materialize</b></a>
-					</div>
-				</div>
-			</div>
-		</footer>
-        <div id="modal1" class="modal">
-		    <div class="modal-content">
-		      <h4>Log In</h4>
-		      <p>Para poder avanzar a la seccion de "Preceptor" hace falta pasar por el 
-                siguiente sistema de Log In que sirve para veriricar que el usuario que 
-                accede al sistema sea un Preceptor y no un Guardia entre otros.</p>
-		    </div>
-		    <div class="modal-footer">
-		      <a class="modal-action modal-close waves-effect waves-green btn-flat"><i class="material-icons prefix" style="font-size: 45px">done</i></a>
-		    </div>
-		  </div>
-		<!--Importar jQuery antes de materialize.js-->
-		<script type="text/javascript" src="{% static 'jquery/jquery-3.2.1.min.js' %}"></script>
-		<script type="text/javascript" src="{% static 'materialize/js/materialize.min.js' %}"></script>
-	</body>
-    <script>
-        
-        function abrir_modal(){
-            $('.modal').modal();
-        }
-    </script>
-</html>
+<!DOCTYPE=html>
+{% extends 'base.html' %}
+{% block title %}Login{% endblock title %}
+{% block content %}
+<style>
+    html, body {
+        height: 100%;
+    }
+    body {
+        background: black; /*#ededed; */
+        text-align: center;
+    }
+    .main {
+        height: 100%;
+        width: 100%;
+        display: table;
+    }
+    .wrapper {
+        display: table-cell;
+        height: 100%;
+        vertical-align: middle;
+    }
+</style>
+<div class="main">
+  <div class="wrapper">
+    <div class="ink-grid">
+      {% if user.is_authenticated %}
+        <div class="column-group push-bottom">
+          <div class="column-group push-center">
+            <div class="ink-alert basic info" role="alert">
+              <button class="ink-dismiss">&times;</button>
+              <p style="color: whitesmoke"><b>Aviso:</b> Usted está actualmente autenticado como <strong>{{user}}</strong>.</p>
+            </div>
+          </div>
+        </div>
+      {% endif %}
+      <h1>Bienvenido</h1>
+      <div class="column-group push-center push-middle">
+        <form class="ink-form" method="POST">
+        {% csrf_token %}
+          <div class="control-group">
+            <div class="control">
+              <input id="username" name="username" type="text" placeholder="usuario" required/>
+            </div>
+          </div>
+          <div class="control-group">
+            <div class="control">
+              <input id="password" name="password" type="password" placeholder="contraseña" required/>
+            </div>
+          </div>
+        <button class="ink-button whitesmoke" type="submit" name="action">Iniciar sesión</button>
+      </form>
+      </div>
+      {% if form.errors %}
+        <div class="column-group push-bottom">
+          <div class="column-group push-center">
+            <div class="ink-alert basic error" role="alert">
+              <button class="ink-dismiss">&times;</button>
+              <p style="color: whitesmoke"><b>Error:</b> Los datos ingresados son incorrectos.</p>
+            </div>
+          </div>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock content %}
