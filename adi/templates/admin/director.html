@@ -5,19 +5,19 @@
 
 <style type="text/css">
   body {
-      background: black;
+    background: black;
   }
   header {
-      padding: 2em 0;
-      margin-bottom: 2em;
+    padding: 2em 0;
+    margin-bottom: 2em;
   }
   header h1 {
-      font-size: 2em;
+    font-size: 2em;
   }
   header h1 small:before  {
-      content: "|";
-      margin: 0 0.5em;
-      font-size: 1.6em;
+    content: "|";
+    margin: 0 0.5em;
+    font-size: 1.6em;
   }
 </style>
 <div class="ink-grid">
@@ -64,12 +64,12 @@
                 </tr>
               </thead>
               <tbody>
-              {% for alumno in todos_los_alumnos %}
+                {% for alumnos in todos_los_alumnos %}
                 <tr>
-                  <td>{{alumno.nombre}} {{alumno.apellido}}</td>
-                  <td>{{alumno.dni}}</td>
-                  <td>{{alumno.curso}}</td>
-                  <td>{{alumno.tutor}}</td>
+                  <td>{{alumnos.nombre}} {{alumnos.apellido}}</td>
+                  <td>{{alumnos.dni}}</td>
+                  <td>{{alumnos.curso}}</td>
+                  <td>{{alumnos.tutor}}</td>
                   <td>
                     <form class="ink-form">
                       <div class="control-group">
@@ -80,81 +80,83 @@
                     </form>
                   </td>
                 </tr>
-              {% endfor %}
+                {% endfor %}
               </tbody>
             </table>
           </div>
           <div id="cargar_alumnosDIV" style="display: none;">
-            <form class="ink-form">
+            <form class="ink-form" id="crear_alumno" action="{% url 'crear_alumno' %}" method="POST">
+              {% csrf_token %}
               <div class="column-group gutters">
                 <div class="control-group all-33 required">
                   <label for="nombre">Nombre</label>
-                    <div class="control">
-                      <input type="text" name="nombre" id="nombre">
-                    </div>
+                  <div class="control">
+                    <input type="text" name="nombre_alumno" id="nombre_alumno">
                   </div>
-                  <div class="control-group all-33 required">
-                    <label for="apellido">Apellido</label>
-                    <div class="control">
-                      <input type="text" name="apellido" id="apellido">
-                    </div>
+                </div>
+                <div class="control-group all-33 required">
+                  <label for="apellido">Apellido</label>
+                  <div class="control">
+                    <input type="text" name="apellido_alumno" id="apellido_alumno">
                   </div>
-                  <div class="control-group all-33 required">
-                    <label for="dni">D.N.I.</label>
-                    <div class="control">
-                      <input type="text" name="dni" id="dni" minlength="8" maxlength="8" required>
-                    </div>
+                </div>
+                <div class="control-group all-33 required">
+                  <label for="dni">D.N.I.</label>
+                  <div class="control">
+                    <input type="text" name="dni_alumno" id="dni_alumno" minlength="8" maxlength="8" required>
                   </div>
-                  <div class="control-group all-33 required">
-                    <label for="legajo">Legajo</label>
-                    <div class="control">
-                      <input type="text" name="legajo" id="legajo" minlength="4" maxlength="4" required>
-                    </div>
+                </div>
+                <div class="control-group all-33 required">
+                  <label for="legajo">Legajo</label>
+                  <div class="control">
+                    <input type="text" name="legajo_alumno" id="legajo_alumno" minlength="4" maxlength="4" required>
                   </div>
-                  <div class="control-group all-33 required">
-                    <label for="fecha_nacimiento">Fecha de nacimiento</label>
-                    <div class="control">
-                      <input type="text" name="fecha_nacimiento" id="fecha_nacimiento">
-                    </div>
+                </div>
+                <div class="control-group all-33 required">
+                  <label for="fecha_nacimiento">Fecha de nacimiento</label>
+                  <div class="control">
+                    <input type="text" name="fecha_nacimiento_alumno" id="fecha_nacimiento_alumno">
                   </div>
-                  <div class="control-group all-33 required">
-                    <label for="direccion">Dirección</label>
-                    <div class="control">
-                      <input type="text" name="direccion" id="direccion">
-                    </div>
+                </div>
+                <div class="control-group all-33 required">
+                  <label for="direccion">Dirección</label>
+                  <div class="control">
+                    <input type="text" name="direccion_alumno" id="direccion_alumno">
                   </div>
-                  <!-- Append button -->
-                  <div class="control-group all-33 required">
-                    <label for="foto">Foto</label>
-                    <div class="control">
-                      <input type="file" name="foto" id="foto">
-                    </div>
+                </div>
+                <!-- Append button -->
+                <div class="control-group all-33 required">
+                  <label for="foto">Foto</label>
+                  <div class="control">
+                    <input type="file" name="foto_alumno" id="foto_alumno">
                   </div>
-                  <div class="control-group all-33 required">
-                    <label for="tutor">Tutor</label>
-                    <div class="control">
-                      <input type="text" name="tutor" id="tutor">
-                    </div>
+                </div>
+                <div class="control-group all-33 required">
+                  <label for="tutor">Tutor</label>
+                  <div class="control">
+                    <input type="text" name="tutor_alumno" id="tutor_alumno">
                   </div>
-                  <!-- Append button -->
-                  <div class="control-group all-33 required">
-                    <div class="control append-button" role="search">
-                      <label for="alumnos_curso">Curso</label>
-                      <div class="control">
-                        <input type="text" name="alumnos_curso" id="alumnos_curso" disabled placeholder="Seleccione">
-                        <div class="ink-dropdown" data-target="#alumnos_curso_dropdown" data-dismiss-after="2">
-                          <button class="ink-button">Seleccionar</button>
-                          <ul id="alumnos_curso_dropdown" class="dropdown-menu">
-                            {% for curso in todos_los_cursos %}
-                              <li><a href="#">{{curso}}</a></li>
-                            {% endfor %}
-                          </ul>
-                        </div>
+                </div>
+                <!-- Append button -->
+                <div class="control-group all-33 required">
+                  <div class="control append-button" role="search">
+                    <label for="alumnos_curso">Curso</label>
+                    <div class="control">
+                      <input type="text" name="alumnos_curso" id="alumnos_curso" disabled placeholder="Seleccione">
+                      <div class="ink-dropdown" data-target="#alumnos_curso_dropdown" data-dismiss-after="2">
+                        <button class="ink-button">Seleccionar</button>
+                        <ul id="alumnos_curso_dropdown" class="dropdown-menu">
+                          {% for curso in todos_los_cursos %}
+                          <li><a href="#">{{curso}}</a></li>
+                          {% endfor %}
+                        </ul>
                       </div>
                     </div>
                   </div>
                 </div>
-              </form>
+              </div>
+            </form>
+            <button onclick="check_data()"> CRERAR</button>
           </div>
         </div>
         <!-- Cursos -->
@@ -176,7 +178,7 @@
                 </tr>
               </thead>
               <tbody>
-            {% for cursos in todos_los_cursos %}
+                {% for cursos in todos_los_cursos %}
                 <tr>
                   <td>{{cursos.anuario}}</td>
                   <td>{{cursos.division}}</td>
@@ -191,7 +193,7 @@
                     </form>
                   </td>
                 </tr>
-            {% endfor %}
+                {% endfor %}
               </tbody>
             </table>
           </div>
@@ -207,9 +209,13 @@
                       <div class="ink-dropdown" data-target="#cursos_anuario_dropdown" data-dismiss-after="2" placeholder="Seleccione">
                         <button class="ink-button">Seleccionar</button>
                         <ul id="cursos_anuario_dropdown" class="dropdown-menu">
-                          {% for curso in todos_los_cursos %}
-                            <li><a href="#">{{curso.anuario}}</a></li>
-                          {% endfor %}
+                          <li><a href="primero">1</a></li>
+                          <li><a href="segundo">2</a></li>
+                          <li><a href="tercero">3</a></li>
+                          <li><a href="cuarto">4</a></li>
+                          <li><a href="quinto">5</a></li>
+                          <li><a href="sexto">6</a></li>
+                          <li><a href="septimo">7</a></li>
                         </ul>
                       </div>
                     </div>
@@ -224,9 +230,9 @@
                       <div class="ink-dropdown" data-target="#cursos_division_dropdown" data-dismiss-after="2" placeholder="Seleccione">
                         <button class="ink-button">Seleccionar</button>
                         <ul id="cursos_division_dropdown" class="dropdown-menu">
-                          {% for curso in todos_los_cursos %}
-                            <li><a href="#">{{curso.division}}</a></li>
-                          {% endfor %}
+                          <li><a id="a" href="#">A</a></li>
+                          <li><a id="b" href="#">B</a></li>
+                          <li><a id="c" href="#">C</a></li>
                         </ul>
                       </div>
                     </div>
@@ -242,7 +248,7 @@
                         <button class="ink-button">Seleccionar</button>
                         <ul id="cursos_preceptor_dropdown" class="dropdown-menu">
                           {% for preceptor in todos_los_preceptores %}
-                            <li><a href="#">{{preceptor.nombre_usuario}}</a></li>
+                          <li><a href="#">{{preceptor.nombre_usuario}}</a></li>
                           {% endfor %}
                         </ul>
                       </div>
@@ -275,22 +281,22 @@
               </thead>
               <tbody>
                 {% for guardia in todos_los_guardias %}
-                  <tr>
-                    <td>{{guardia.nombre}}</td>
-                    <td>{{guardia.apellido}}</td>
-                    <td>{{guardia.dni}}</td>
-                    <td>{{guardia.num_cel}}</td>
-                    <td>{{guardia.nombre_usuario}}</td>
-                    <td>
-                      <form class="ink-form">
-                        <div class="control-group">
-                          <ul class="control unstyled">
-                            <li><input type="radio" id="rb1" name="rb" value="Eliminar"><label for="rb1">Eliminar</label></li>
-                          </ul>
-                        </div>
-                      </form>
-                    </td>
-                  </tr>
+                <tr>
+                  <td>{{guardia.nombre}}</td>
+                  <td>{{guardia.apellido}}</td>
+                  <td>{{guardia.dni}}</td>
+                  <td>{{guardia.num_cel}}</td>
+                  <td>{{guardia.nombre_usuario}}</td>
+                  <td>
+                    <form class="ink-form">
+                      <div class="control-group">
+                        <ul class="control unstyled">
+                          <li><input type="radio" id="rb1" name="rb" value="Eliminar"><label for="rb1">Eliminar</label></li>
+                        </ul>
+                      </div>
+                    </form>
+                  </td>
+                </tr>
                 {% endfor %}
               </tbody>
             </table>
@@ -340,6 +346,7 @@
               <li><a href="#" onclick="cargarPreceptores()">Cargar un preceptor</a></li>
             </ul>
           </nav>
+          <br>
           <div id="ver_preceptoresDIV" style="display: block;">
             <table class="ink-table bordered">
               <thead>
@@ -355,23 +362,23 @@
               </thead>
               <tbody>
                 {% for preceptor in todos_los_preceptores %}
-                  <tr>
-                    <td>{{preceptor.nombre}}</td>
-                    <td>{{preceptor.apellido}}</td>
-                    <td>{{preceptor.dni}}</td>
-                    <td>{{preceptor.email}}</td>
-                    <td>{{preceptor.num_cel}}</td>
-                    <td>{{preceptor.nombre_usuario}}</td>
-                    <td>
-                      <form class="ink-form">
-                        <div class="control-group">
-                          <ul class="control unstyled">
-                            <li><input type="radio" id="rb1" name="rb" value="Eliminar"><label for="rb1">Eliminar</label></li>
-                          </ul>
-                        </div>
-                      </form>
-                    </td>
-                  </tr>
+                <tr>
+                  <td>{{preceptor.nombre}}</td>
+                  <td>{{preceptor.apellido}}</td>
+                  <td>{{preceptor.dni}}</td>
+                  <td>{{preceptor.email}}</td>
+                  <td>{{preceptor.num_cel}}</td>
+                  <td>{{preceptor.nombre_usuario}}</td>
+                  <td>
+                    <form class="ink-form">
+                      <div class="control-group">
+                        <ul class="control unstyled">
+                          <li><input type="radio" id="rb1" name="rb" value="Eliminar"><label for="rb1">Eliminar</label></li>
+                        </ul>
+                      </div>
+                    </form>
+                  </td>
+                </tr>
                 {% endfor %}
               </tbody>
             </table>
@@ -424,122 +431,148 @@
   </header>
 </div>
 <script type="text/javascript">
-    //FUNCIONES PARA OCULTAR
-    function ocultar_inicio() {
-      if (document.getElementById('inicioDIV').style.display == "block") {
-        document.getElementById('inicioDIV').style.display = "none";
-      }
-    }
 
-    function ocultar_mostrarAlumnos() {
-      if (document.getElementById('alumnosDIV').style.display == "block") {
-        document.getElementById('alumnosDIV').style.display = "none";
-      }
+  function check_data(){
+    var nombre = document.getElementById("nombre_alumno").value;
+    var estado_nombre = false;
+    var apellido = document.getElementById("apellido_alumno").value;
+    var estado_apellido = false;
+    var dni = document.getElementById("dni_alumno").value;
+    var estado_dni = false;
+    var legajo = document.getElementById("legajo_alumno").value;
+    var estado_legajo = false;
+    if (isNaN(nombre)){
+      estado_nombre = true;
     }
+    if (isNaN(apellido)){
+      estado_apellido = true
+    }
+    if (isNaN(dni) == false){
+      estado_dni = true;
+    }
+    if (isNaN(legajo) == false){
+      estado_legajo = true
+    }
+    console.log (estado_nombre, estado_apellido, estado_dni, estado_legajo);
+    crear_alumno.submit();
+  }
 
-    function ocultar_mostrarCursos() {
-      if (document.getElementById('cursosDIV').style.display == "block") {
-        document.getElementById('cursosDIV').style.display = "none";
-      }
+  //FUNCIONES PARA OCULTAR
+  function ocultar_inicio() {
+    if (document.getElementById('inicioDIV').style.display == "block") {
+      document.getElementById('inicioDIV').style.display = "none";
     }
+  }
 
-    function ocultar_mostrarGuardias() {
-      if (document.getElementById('guardiasDIV').style.display == "block") {
-        document.getElementById('guardiasDIV').style.display = "none";
-      }
+  function ocultar_mostrarAlumnos() {
+    if (document.getElementById('alumnosDIV').style.display == "block") {
+      document.getElementById('alumnosDIV').style.display = "none";
     }
+  }
 
-    function ocultar_mostrarPreceptores() {
-      if (document.getElementById('preceptoresDIV').style.display == "block") {
-        document.getElementById('preceptoresDIV').style.display = "none";
-      }
+  function ocultar_mostrarCursos() {
+    if (document.getElementById('cursosDIV').style.display == "block") {
+      document.getElementById('cursosDIV').style.display = "none";
     }
-    // FUNCIONES PARA MOSTRAR LA SECCION ALUMNOS
-    function mostrarAlumnos() {
-      verAlumnos()
-      if (document.getElementById('alumnosDIV').style.display == "none") {
-        document.getElementById('alumnosDIV').style.display = "block";
-      }
-    }
+  }
 
-    function verAlumnos() {
-      if (document.getElementById('ver_alumnosDIV').style.display == "none") {
-        document.getElementById('ver_alumnosDIV').style.display = "block";
-      }
-      document.getElementById('cargar_alumnosDIV').style.display = "none";
+  function ocultar_mostrarGuardias() {
+    if (document.getElementById('guardiasDIV').style.display == "block") {
+      document.getElementById('guardiasDIV').style.display = "none";
     }
+  }
 
-    function cargarAlumnos() {
-      if (document.getElementById('cargar_alumnosDIV').style.display == "none") {
-        document.getElementById('cargar_alumnosDIV').style.display = "block";
-      }
-      document.getElementById('ver_alumnosDIV').style.display = "none";
+  function ocultar_mostrarPreceptores() {
+    if (document.getElementById('preceptoresDIV').style.display == "block") {
+      document.getElementById('preceptoresDIV').style.display = "none";
     }
+  }
+  // FUNCIONES PARA MOSTRAR LA SECCION ALUMNOS
+  function mostrarAlumnos() {
+    verAlumnos()
+    if (document.getElementById('alumnosDIV').style.display == "none") {
+      document.getElementById('alumnosDIV').style.display = "block";
+    }
+  }
 
-    // FUNCIONES PARA MOSTRAR LA SECCION DE CURSOS
-    function mostrarCursos() {
-      verCursos()
-      if (document.getElementById('cursosDIV').style.display == "none") {
-        document.getElementById('cursosDIV').style.display = "block";
-      }
+  function verAlumnos() {
+    if (document.getElementById('ver_alumnosDIV').style.display == "none") {
+      document.getElementById('ver_alumnosDIV').style.display = "block";
     }
+    document.getElementById('cargar_alumnosDIV').style.display = "none";
+  }
 
-    function verCursos() {
-      if (document.getElementById('ver_cursosDIV').style.display == "none") {
-        document.getElementById('ver_cursosDIV').style.display = "block";
-      }
-      document.getElementById('cargar_cursosDIV').style.display = "none";
+  function cargarAlumnos() {
+    if (document.getElementById('cargar_alumnosDIV').style.display == "none") {
+      document.getElementById('cargar_alumnosDIV').style.display = "block";
     }
+    document.getElementById('ver_alumnosDIV').style.display = "none";
+  }
 
-    function cargarCursos() {
-      if (document.getElementById('cargar_cursosDIV').style.display == "none") {
-        document.getElementById('cargar_cursosDIV').style.display = "block";
-      }
-      document.getElementById('ver_cursosDIV').style.display = "none";
+  // FUNCIONES PARA MOSTRAR LA SECCION DE CURSOS
+  function mostrarCursos() {
+    verCursos()
+    if (document.getElementById('cursosDIV').style.display == "none") {
+      document.getElementById('cursosDIV').style.display = "block";
     }
+  }
 
-    // FUNCIONES PARA MOSTRAR LA SECCION DE GUARDIAS
-    function mostrarGuardias() {
-      verGuardias()
-      if (document.getElementById('guardiasDIV').style.display == "none") {
-        document.getElementById('guardiasDIV').style.display = "block";
-      }
+  function verCursos() {
+    if (document.getElementById('ver_cursosDIV').style.display == "none") {
+      document.getElementById('ver_cursosDIV').style.display = "block";
     }
+    document.getElementById('cargar_cursosDIV').style.display = "none";
+  }
 
-    function verGuardias() {
-      if (document.getElementById('ver_guardiasDIV').style.display == "none") {
-        document.getElementById('ver_guardiasDIV').style.display = "block";
-      }
-      document.getElementById('cargar_guardiasDIV').style.display = "none";
+  function cargarCursos() {
+    if (document.getElementById('cargar_cursosDIV').style.display == "none") {
+      document.getElementById('cargar_cursosDIV').style.display = "block";
     }
+    document.getElementById('ver_cursosDIV').style.display = "none";
+  }
 
-    function cargarGuardias() {
-      if (document.getElementById('cargar_guardiasDIV').style.display == "none") {
-        document.getElementById('cargar_guardiasDIV').style.display = "block";
-      }
-      document.getElementById('ver_guardiasDIV').style.display = "none";
+  // FUNCIONES PARA MOSTRAR LA SECCION DE GUARDIAS
+  function mostrarGuardias() {
+    verGuardias()
+    if (document.getElementById('guardiasDIV').style.display == "none") {
+      document.getElementById('guardiasDIV').style.display = "block";
     }
+  }
 
-    // FUNCIONES PARA MOSTRAR LA SECCION DE PRECEPTORES
-    function mostrarPreceptores() {
-      verPreceptores()
-      if (document.getElementById('preceptoresDIV').style.display == "none") {
-        document.getElementById('preceptoresDIV').style.display = "block";
-      }
+  function verGuardias() {
+    if (document.getElementById('ver_guardiasDIV').style.display == "none") {
+      document.getElementById('ver_guardiasDIV').style.display = "block";
     }
+    document.getElementById('cargar_guardiasDIV').style.display = "none";
+  }
 
-    function verPreceptores() {
-      if (document.getElementById('ver_preceptoresDIV').style.display == "none") {
-        document.getElementById('ver_preceptoresDIV').style.display = "block";
-      }
-      document.getElementById('cargar_preceptoresDIV').style.display = "none";
+  function cargarGuardias() {
+    if (document.getElementById('cargar_guardiasDIV').style.display == "none") {
+      document.getElementById('cargar_guardiasDIV').style.display = "block";
     }
+    document.getElementById('ver_guardiasDIV').style.display = "none";
+  }
 
-    function cargarPreceptores() {
-      if (document.getElementById('cargar_preceptoresDIV').style.display == "none") {
-        document.getElementById('cargar_preceptoresDIV').style.display = "block";
-      }
-      document.getElementById('ver_preceptoresDIV').style.display = "none";
+  // FUNCIONES PARA MOSTRAR LA SECCION DE PRECEPTORES
+  function mostrarPreceptores() {
+    verPreceptores()
+    if (document.getElementById('preceptoresDIV').style.display == "none") {
+      document.getElementById('preceptoresDIV').style.display = "block";
     }
+  }
+
+  function verPreceptores() {
+    if (document.getElementById('ver_preceptoresDIV').style.display == "none") {
+      document.getElementById('ver_preceptoresDIV').style.display = "block";
+    }
+    document.getElementById('cargar_preceptoresDIV').style.display = "none";
+  }
+
+  function cargarPreceptores() {
+    if (document.getElementById('cargar_preceptoresDIV').style.display == "none") {
+      document.getElementById('cargar_preceptoresDIV').style.display = "block";
+    }
+    document.getElementById('ver_preceptoresDIV').style.display = "none";
+  }
 </script>
 {% endblock content %}

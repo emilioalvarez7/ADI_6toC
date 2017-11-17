@@ -23,7 +23,6 @@ urlpatterns = [
     url(r'^guardia/$', guardia, name="cambio2"),
     url(r'^estadisticas_alumno/$', estadisticas_alumno, name="estadisticas_alumno"),
     url(r'^crearpreceptor/$', cpreceptor, name="cambio4"),
-    url(r'^crearalumno/$', calumno, name="cambio5"),
     url(r'^cambiaralumno/$', chalumno, name="cambio6"),
 
     #URL para pasar ID.

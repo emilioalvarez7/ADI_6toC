@@ -25,9 +25,6 @@ def cpreceptor(request):
 def chalumno(request):
     return render(request, 'admin/modificar_alumno.html')
 
-def calumno(request):
-    return render(request, 'admin/cargar_alumno.html')
-
 def guardia(request):
     return render(request, 'guardia.html')
 
@@ -44,10 +41,12 @@ def director(request):
     grupos = Group.objects.all()
     cursos = Curso.objects.all()
     preceptores = Preceptor.objects.all().order_by('nombre', 'apellido', 'cursos__anuario', 'cursos__division')
-    return render(
-        request,
-        'admin/director.html',
-        {'todos_los_preceptores': preceptores,
-        'todos_los_grupos': grupos,
-        'todos_los_cursos': cursos}
-)
+    alumnos = Alumno.objects.all().order_by('apellido', 'nombre')
+    return render( request,
+                  'admin/director.html',
+                  {'todos_los_preceptores': preceptores,
+                   'todos_los_grupos': grupos,
+                   'todos_los_cursos': cursos,
+                    'todos_los_alumnos': alumnos
+                  }
+                 )

@@ -113,19 +113,24 @@ def estadisticas_alumno(request):
     return JsonResponse(data)
 
 def crear_alumno(request):
-    nombre = request.POST['nombre']
-    apellido = request.POST['apellido']
-    dni = request.POST['dni']
-    num_curso = request.POST['num_curso']
-    #Buscamos el curso
-    cur = Curso.objects.get(numero=num_curso)
-    if cur:
-        #Buscamos el curso del preceptor
-        al = Alumno(nombre=nombre, apellido=apellido, dni=dni, estado="Indefinido", curso=cur, faltas=0)
-        al.save()
-    else:
-        print "HOla"
-
+    if request.method=="POST":
+        nombre = request.POST['nombre_alumno']
+        apellido = request.POST['apellido_alumno']
+        dni = request.POST['dni_alumno']
+        legajo = request.POST['legajo_alumno']
+        fecha_de_nacimiento = request.POST['fecha_nacimiento_alumno']
+        direccion = request.POST['direccion_alumno']
+        #foto = request.POST['foto_alumno']
+        #tutor = request.POST['tutor_alumno']
+        curso = Curso.objects.get(pk=1)
+        tutor = Tutor.objects.get(nombre="Pepito")
+        #print curso
+        g = Group.objects.get(name='Alumno')
+        grupo_usuario = g
+        aux = request.user
+        alumno = Alumno(nombre=nombre, apellido=apellido, dni=dni, legajo=legajo, direccion=direccion, curso=curso, tutor=tutor, nombre_usuario=aux, grupo_usuario=grupo_usuario)
+        alumno.save()
+        print alumno
     return HttpResponse('FUNCIONO')
 
 
@@ -241,13 +246,11 @@ def formularios(request):
     return render(request,'guardia/formularios.html',{'todos_los_f3':forms3, 'todos_los_f2':forms2})
 
 def mis_alumnos_presentes(request):
-    print "llega"
     pepe = request.user
-    prec = Preceptor.objects.filter(nombre_usuario=pepe)
-    al = Alumno.objects.filter(curso__preceptor=prec, estado="Presente")
-    return render(request,
-                 'preceptor/alumnos/alumnos_para_formulario.html',
-                 {'todos_los_alumnos':al})
+    prec = Preceptor.objects.get(nombre_usuario=pepe)
+    al = Alumno.objects.filter(curso__preceptor=prec, estado="ND")
+    return HttpResponse (al)
+    #return render(request, 'preceptor/formularios/elegir_formulario.html', {'todos_los_alumnos': al})
 
 def mis_alumnos(request):
     pepe = request.user
